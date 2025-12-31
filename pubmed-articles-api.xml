@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>pubmed-articles-api</Name>
-  <Repository>ghcr.io/YOUR_GITHUB_USERNAME/pubmed-articles-api:latest</Repository>
+  <Repository>ghcr.io/ahalansari/pubmed-articles-api:latest</Repository>
   <Registry>https://ghcr.io</Registry>
   <Branch>
     <Tag>latest</Tag>
@@ -11,8 +11,8 @@
   <MyIP/>
   <Shell>bash</Shell>
   <Privileged>false</Privileged>
-  <Support>https://github.com/YOUR_GITHUB_USERNAME/pubmed-articles-api/issues</Support>
-  <Project>https://github.com/YOUR_GITHUB_USERNAME/pubmed-articles-api</Project>
+  <Support>https://github.com/ahalansari/pubmed-articles-api/issues</Support>
+  <Project>https://github.com/ahalansari/pubmed-articles-api</Project>
   <Overview>
     PubMed Articles API - A Flask-based REST API for searching PubMed, retrieving open-access articles from PubMed Central, and generating AI-powered clinical summaries using LLM backends (LM Studio or vLLM).
     
@@ -27,8 +27,8 @@
   </Overview>
   <Category>Productivity: Tools:</Category>
   <WebUI>http://[IP]:[PORT:8000]/api/v1/docs</WebUI>
-  <TemplateURL>https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pubmed-articles-api/main/pubmed-articles-api.xml</TemplateURL>
-  <Icon>https://raw.githubusercontent.com/YOUR_GITHUB_USERNAME/pubmed-articles-api/main/icon.png</Icon>
+  <TemplateURL>https://raw.githubusercontent.com/ahalansari/pubmed-articles-api/main/pubmed-articles-api.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/ahalansari/pubmed-articles-api/main/icon.png</Icon>
   <ExtraParams>--restart=unless-stopped</ExtraParams>
   <PostArgs/>
   <CPUset/>

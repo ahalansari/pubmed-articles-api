@@ -16,7 +16,7 @@ Flask-based REST API for searching PubMed, retrieving open-access articles from 
 
 ```bash
 # Clone and setup
-git clone https://github.com/YOUR_USERNAME/pubmed-articles-api.git
+git clone https://github.com/ahalansari/pubmed-articles-api.git
 cd pubmed-articles-api
 
 # Create virtual environment
@@ -93,7 +93,7 @@ curl -X POST http://localhost:8000/api/v1/retrieve \
 
 1. Add the template URL to Community Applications:
    ```
-   https://raw.githubusercontent.com/YOUR_USERNAME/pubmed-articles-api/main/pubmed-articles-api.xml
+   https://raw.githubusercontent.com/ahalansari/pubmed-articles-api/main/pubmed-articles-api.xml
    ```
 
 2. Configure:
