@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  pubmed-api:
+    build: .
+    container_name: pubmed-articles-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - API_KEY=${API_KEY:-}
+      - API_PORT=8000
+      - NCBI_API_KEY=${NCBI_API_KEY:-}
+      - NCBI_EMAIL=${NCBI_EMAIL:-}
+      - LLM_BACKEND=${LLM_BACKEND:-lmstudio}
+      - LM_STUDIO_BASE_URL=${LM_STUDIO_BASE_URL:-http://host.docker.internal:1234/v1}
+      - LM_STUDIO_MODEL=${LM_STUDIO_MODEL:-default}
+      - LM_STUDIO_CONTEXT_WINDOW=${LM_STUDIO_CONTEXT_WINDOW:-8192}
+      - VLLM_LLM_BASE_URL=${VLLM_LLM_BASE_URL:-}
+      - VLLM_LLM_MODEL=${VLLM_LLM_MODEL:-}
+      - VLLM_API_KEY=${VLLM_API_KEY:-EMPTY}
+      - VLLM_MAX_TOKENS=${VLLM_MAX_TOKENS:-2048}
+      - VLLM_CONTEXT_WINDOW=${VLLM_CONTEXT_WINDOW:-8192}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - pubmed-network
+
+networks:
+  pubmed-network:
+    driver: bridge
+

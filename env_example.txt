@@ -1,0 +1,40 @@
+# =============================================================================
+# PubMed Articles API Configuration
+# =============================================================================
+# Copy this file to .env and update the values
+
+# API Configuration
+API_KEY="your-api-key-here"
+API_PORT=8000
+
+# =============================================================================
+# NCBI API Key (Optional but Recommended)
+# Get your key at: https://www.ncbi.nlm.nih.gov/account/settings/
+# With key: 10 requests/second | Without: 3 requests/second
+# =============================================================================
+NCBI_API_KEY=""
+NCBI_EMAIL="your-email@example.com"
+
+# =============================================================================
+# LLM Backend Selection: "lmstudio" (default) or "vllm"
+# =============================================================================
+LLM_BACKEND=lmstudio
+
+# -----------------------------------------------------------------------------
+# Option 1: LM Studio Configuration (default)
+# LM Studio serves both LLM and embeddings on the same server
+# -----------------------------------------------------------------------------
+LM_STUDIO_BASE_URL=http://localhost:1234/v1
+LM_STUDIO_MODEL=default
+# LM_STUDIO_CONTEXT_WINDOW=8192
+
+# -----------------------------------------------------------------------------
+# Option 2: vLLM Configuration
+# vLLM uses SEPARATE servers for LLM
+# -----------------------------------------------------------------------------
+# VLLM_LLM_BASE_URL=http://localhost:8000/v1
+# VLLM_LLM_MODEL=meta-llama/Meta-Llama-3-8B-Instruct
+# VLLM_API_KEY=EMPTY
+# VLLM_MAX_TOKENS=2048
+# VLLM_CONTEXT_WINDOW=8192
+
