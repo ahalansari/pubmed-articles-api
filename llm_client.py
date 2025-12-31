@@ -26,14 +26,14 @@ class LLMClient:
             self.model = os.getenv("VLLM_LLM_MODEL", "meta-llama/Meta-Llama-3-8B-Instruct")
             self.api_key = os.getenv("VLLM_API_KEY", "EMPTY")
             max_tokens_env = int(os.getenv("VLLM_MAX_TOKENS", "2048"))
-            self.max_tokens = max_tokens_env if max_tokens_env > 0 else 2048
+            self.max_tokens = None if max_tokens_env <= 0 else max_tokens_env
             self.context_window = int(os.getenv("VLLM_CONTEXT_WINDOW", "8192"))
         else:
             self.base_url = os.getenv("LM_STUDIO_BASE_URL", "http://localhost:1234/v1")
             self.model = os.getenv("LM_STUDIO_MODEL", "default")
             self.api_key = "not-needed"
             max_tokens_env = int(os.getenv("LM_STUDIO_MAX_TOKENS", "2048"))
-            self.max_tokens = max_tokens_env if max_tokens_env > 0 else 2048
+            self.max_tokens = None if max_tokens_env <= 0 else max_tokens_env
             self.context_window = int(os.getenv("LM_STUDIO_CONTEXT_WINDOW", "8192"))
         
         self.max_content_tokens = self.context_window - self.PROMPT_OVERHEAD_TOKENS - self.RESPONSE_TOKENS_RESERVE
