@@ -107,7 +107,8 @@ def search_articles():
     {
         "query": "diabetes mellitus",
         "limit": 10,
-        "sort": "relevance"
+        "sort": "relevance",
+        "open_access_only": false
     }
     """
     start_time = time.time()
@@ -116,6 +117,7 @@ def search_articles():
     query = data.get("query", "").strip()
     limit = data.get("limit", 10)
     sort = data.get("sort", "relevance")
+    open_access_only = data.get("open_access_only", False)
     
     if not query:
         return jsonify({
@@ -136,7 +138,7 @@ def search_articles():
         }), 400
     
     try:
-        search_result = pubmed_client.search(query, max_results=limit, sort=sort)
+        search_result = pubmed_client.search(query, max_results=limit, sort=sort, open_access_only=open_access_only)
         pmids = search_result.get("pmids", [])
         
         if pmids:
@@ -162,6 +164,7 @@ def search_articles():
             "total_available": search_result.get("total_count", 0),
             "results_count": len(results),
             "sort": sort,
+            "open_access_only": open_access_only,
             "results": results,
             "_meta": {
                 "execution_time_seconds": round(time.time() - start_time, 3)
@@ -190,7 +193,8 @@ def retrieve_articles():
         "patient_gender": "Male",
         "limit": 5,
         "include_summaries": true,
-        "include_full_text": true
+        "include_full_text": true,
+        "open_access_only": false
     }
     """
     start_time = time.time()
@@ -204,6 +208,7 @@ def retrieve_articles():
     limit = data.get("limit", 5)
     include_summaries = data.get("include_summaries", False)
     include_full_text = data.get("include_full_text", False)
+    open_access_only = data.get("open_access_only", False)
     
     if not keywords and not topic and not case_scenario:
         return jsonify({
@@ -241,7 +246,7 @@ def retrieve_articles():
         all_articles = []
         
         for term in search_terms[:5]:
-            search_result = pubmed_client.search(term, max_results=20, sort="relevance")
+            search_result = pubmed_client.search(term, max_results=20, sort="relevance", open_access_only=open_access_only)
             pmids = search_result.get("pmids", [])
             for pmid in pmids:
                 if pmid not in all_pmids:
@@ -320,7 +325,8 @@ def retrieve_articles():
             },
             "filters": {
                 "patient_age": patient_age,
-                "patient_gender": patient_gender
+                "patient_gender": patient_gender,
+                "open_access_only": open_access_only
             },
             "results_count": len(results),
             "include_summaries": include_summaries,

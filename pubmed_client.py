@@ -40,7 +40,7 @@ class PubMedClient:
             params["email"] = self.email
         return params
     
-    def search(self, query: str, max_results: int = 10, sort: str = "relevance") -> dict:
+    def search(self, query: str, max_results: int = 10, sort: str = "relevance", open_access_only: bool = False) -> dict:
         """
         Search PubMed for articles matching the query
         
@@ -48,16 +48,21 @@ class PubMedClient:
             query: Search query (supports PubMed syntax)
             max_results: Maximum number of results to return (1-100)
             sort: Sort order - "relevance" or "date"
+            open_access_only: If True, only return articles with free full text
         
         Returns:
             dict with pmids list and total count
         """
         self._rate_limit()
         
+        search_query = query
+        if open_access_only:
+            search_query = f"({query}) AND free full text[filter]"
+        
         params = self._get_base_params()
         params.update({
             "db": "pubmed",
-            "term": query,
+            "term": search_query,
             "retmax": min(max_results, 100),
             "retmode": "json",
             "sort": sort
